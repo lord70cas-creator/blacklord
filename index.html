@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="ar">
+    <head>
+        <meta charset="UTF-8" />
+        <title> 𝐁𝐋𝐀𝐂𝐊 𝐋𝐈𝐒𝐓 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃 </title>
+         <link rel="icon" href="image.png" type="image/png" />
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+            @import url("https://use.fontawesome.com/releases/v6.5.1/css/all.css");
+
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                min-height: 100vh;
+                background: #25252b;
+                font-family: "Poppins", sans-serif;
+                margin: 0;
+                padding: 40px 20px 20px 20px;
+                gap: 25px;
+                color: #fff;
+                direction: rtl;
+                text-align: center;
+            }
+
+            
+            @property --a {
+                syntax: "<angle>";
+                inherits: false;
+                initial-value: 0deg;
+            }
+
+            .dev-modal {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.6);
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            .dev-modal-content {
+                background-color: #25252b;
+                color: white;
+                padding: 30px;
+                border-radius: 12px;
+                width: 90%;
+                max-width: 400px;
+                margin: 15% auto;
+                text-align: center;
+                border: 2px solid orange;
+                box-shadow: 0 0 20px orange;
+                animation: slideIn 0.3s ease-in-out;
+            }
+
+            .dev-modal-content input {
+                padding: 10px;
+                margin: 15px 0;
+                width: 90%;
+                font-size: 16px;
+                border-radius: 6px;
+                border: none;
+                background-color: #1a1a1d;
+                color: white;
+            }
+
+            .dev-modal-content button {
+                background-color: orange;
+                color: black;
+                font-weight: bold;
+                padding: 10px 20px;
+                border-radius: 8px;
+                border: none;
+                margin-top: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .dev-modal-content button:hover {
+                background-color: #e69500;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    transform: scale(0.9);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideIn {
+                from {
+                    transform: translateY(-40px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .welcome-box {
+                position: relative;
+                width: 560px;
+                height: 90px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    #ff6a00 0%,
+                    #ff6a00 5%,
+                    transparent 5%,
+                    transparent 40%,
+                    #ff6a00 50%
+                );
+                filter: drop-shadow(0 15px 30px #000);
+                border-radius: 20px;
+                animation: rotating 4s linear infinite;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 900;
+                font-size: 28px;
+                text-transform: uppercase;
+                text-shadow:
+                    0 0 25px #ff6a00,
+                    0 0 45px #ff6a00,
+                    0 0 70px #ffa540,
+                    0 0 100px #ffb36b;
+                user-select: none;
+                margin-bottom: 20px;
+                padding: 0 220px;
+                white-space: nowrap;
+                direction: rtl;
+            }
+
+            .welcome-box span {
+                font-family: "Brush Script MT", cursive;
+                font-size: 36px;
+                letter-spacing: 0.3em;
+                color: #ffb347;
+                direction: ltr;
+            }
+
+            .welcome-box > :not(span) {
+                letter-spacing: 0.05em;
+            }
+
+            .desc-row {
+                max-width: 560px;
+                background: #1e1b18;
+                border: 2px solid #ff944d;
+                border-radius: 14px;
+                box-shadow:
+                    0 0 10px #ff944d44,
+                    0 0 20px #ff944d22 inset;
+                padding: 18px 25px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                user-select: none;
+                margin-bottom: 20px;
+            }
+
+            .desc-item {
+                background: #331f00;
+                border: 1.5px solid #ff6a00cc;
+                border-radius: 10px;
+                padding: 12px 18px;
+                font-weight: 600;
+                font-size: 17px;
+                color: #ffb270;
+                text-shadow:
+                    0 0 3px #ff6a00aa,
+                    0 0 8px #ff8a1caa;
+                transition: background 0.3s ease;
+            }
+
+            .desc-item:hover {
+                background: #4b3100;
+            }
+
+            .login-notice {
+                max-width: 560px;
+                background: #ff6a0022;
+                border: 2px solid #ff6a00;
+                border-radius: 12px;
+                color: #ff6a00;
+                font-weight: 700;
+                padding: 14px 25px;
+                margin-bottom: 12px;
+                text-align: center;
+                font-size: 18px;
+                user-select: none;
+                text-shadow:
+                    0 0 5px #ff6a0022,
+                    0 0 8px #ff6a00bb;
+                letter-spacing: 0.05em;
+            }
+
+            @keyframes rotating {
+                0% {
+                    --a: 0deg;
+                }
+                100% {
+                    --a: 360deg;
+                }
+            }
+
+            .box {
+                position: relative;
+                width: 560px;
+                height: 280px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    #ff6a00 0%,
+                    #ff6a00 5%,
+                    transparent 5%,
+                    transparent 40%,
+                    #ff6a00 50%
+                );
+                filter: drop-shadow(0 15px 50px #000);
+                border-radius: 20px;
+                animation: rotating 4s linear infinite;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s;
+            }
+
+            .box::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    #ff6a00 0%,
+                    #ff6a00 5%,
+                    transparent 5%,
+                    transparent 40%,
+                    #ff6a00 50%
+                );
+                filter: drop-shadow(0 15px 50px #000);
+                border-radius: 20px;
+                animation: rotating 4s linear infinite;
+                animation-delay: -1s;
+            }
+
+            .box::after {
+                content: "";
+                position: absolute;
+                inset: 4px;
+                background: #2d2d39;
+                border-radius: 15px;
+                border: 8px solid #25252b;
+            }
+
+            .box:hover {
+                width: 630px;
+                height: 700px;
+            }
+
+            .box:hover .login {
+                inset: 40px;
+            }
+
+            .box:hover .loginBx {
+                transform: translateY(0px);
+            }
+
+            .popup-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(15, 15, 15, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .popup-box {
+                background-color: #25252b;
+                border: 2px solid orange;
+                border-radius: 16px;
+                padding: 30px 40px;
+                color: white;
+                text-align: center;
+                width: 340px;
+                animation: fadeIn 0.3s ease-in-out;
+                box-shadow: 0 0 10px #00000088;
+            }
+
+            .popup-icon {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .popup-icon.success {
+                background-color: #28a745;
+            }
+
+            .popup-icon.error {
+                background-color: #dc3545;
+            }
+
+            .popup-btn {
+                margin-top: 20px;
+                padding: 10px 25px;
+                border: none;
+                background-color: orange;
+                color: #25252b;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+            .popup-btn:hover {
+                background-color: #e69500;
+            }
+
+            .login {
+                position: absolute;
+                inset: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                border-radius: 10px;
+                background: #00000033;
+                color: #fff;
+                z-index: 1000;
+                box-shadow: inset 0 10px 20px #00000080;
+                border-bottom: 2px solid #ffffff80;
+                transition: 0.5s;
+                overflow: hidden;
+            }
+
+            .loginBx {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 70px;
+                width: 70%;
+                transform: translateY(126px);
+                transition: 0.5s;
+            }
+
+            h2 {
+                text-transform: uppercase;
+                font-weight: 600;
+                letter-spacing: 0.25em;
+                font-size: 28px;
+                color: #ff6a00;
+                text-shadow:
+                    0 0 10px #ff6a00,
+                    0 0 25px #ff6a00,
+                    0 0 40px #ffa540,
+                    0 0 60px #ffb36b;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                direction: ltr;
+            }
+
+            h2 i {
+                color: #ff6a00;
+                text-shadow:
+                    0 0 10px #ff6a00,
+                    0 0 25px #ff6a00,
+                    0 0 40px #ffa540,
+                    0 0 60px #ffb36b;
+                font-size: 1.2em;
+                user-select: none;
+            }
+
+            button.login-btn {
+                background: #ff6a00;
+                border: none;
+                font-weight: 600;
+                color: #111;
+                cursor: pointer;
+                transition: 0.5s;
+                border-radius: 30px;
+                padding: 14px 0;
+                font-size: 1.2em;
+                width: 100%;
+                letter-spacing: 0.05em;
+                box-shadow:
+                    0 0 12px #ff6a00,
+                    0 0 30px #ff6a00cc;
+                user-select: none;
+            }
+
+            button.login-btn:hover {
+                box-shadow:
+                    0 0 18px #ff6a00,
+                    0 0 50px #ff6a00ee;
+                transform: scale(1.05);
+            }
+
+            /* ✅ دعم الشاشات الصغيرة */
+            @media (max-width: 600px) {
+                .box,
+                .welcome-box,
+                .desc-row,
+                .login-notice {
+                    width: 95%;
+                    padding: 10px;
+                }
+
+                .box:hover {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                .loginBx {
+                    gap: 30px;
+                }
+
+                h2 {
+                    font-size: 20px;
+                }
+            }
+body {
+  cursor: url('mouse.png') 16 16, auto;
+}
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="welcome-box">
+            لــوحــة تــحــكــم الــبــوت |
+            <span>𝐁𝐋𝐀𝐂𝐊 𝐋𝐈𝐒𝐓 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃</span>
+        </div>
+
+        <div class="desc-row">
+          <div class="desc-item">
+                ▪️ هـذه الـلـوحـة تـخـص إدارة إعـدادات بـوت نـشـر لـسـيـرفـر:
+                <a
+                    href="https://discord.gg/blr"
+                    style="color: #ffb347; text-decoration: none"
+                    ><b> 𝐁𝐋𝐀𝐂𝐊  𝐋𝐈𝐒𝐓 </b></a>
+                
+                
+            </div>
+            <div class="desc-item">
+                ▪️ تـسـتـهـدف تـسـهـيـل عـمـلـيـة الـتـحـكـم بـالـتـاغـات و
+                الـرومـات و الـصـلاحـيـات
+            </div>
+            <div class="desc-item">
+                ▪️ الـدخـول مـقـصـور عـلـى الـمـبـرمـجـيـن و الإدارات الـعـلـيـا
+                فـقـط
+            </div>
+            <div class="desc-item">
+                ▪️ تـم تـطـويـر هـذه الـلـوحـة عـلـى يـد:
+                <a
+                    href="https://discord.gg/zn7kAfQG"
+                    style="color: #ffb347; text-decoration: none"
+                    ><b> 𝑳 𝒐 𝒓 𝒅</b></a
+                >
+            </div>
+        </div>
+
+        <div class="login-notice">
+            الـرجـاء تـسـجـيـل دخـول مـن أجـل تـحـقـق مـن صـلـاحـيـات دخـول
+            𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃
+        </div>
+
+        <div class="box">
+            <div class="login">
+                <div class="loginBx">
+                    <h2>
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                        <i class="fa-solid fa-heart"></i>
+                    </h2>
+                    <button class="login-btn" onclick="loginViaBot()">
+                        تسجيل دخول كإدارة العليا
+                   </button>
+                    <button class="login-btn" onclick="loginAsDev()">
+                        تسجيل الدخول كمبرمج
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://kit.fontawesome.com/a076d05399.js"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            function loginViaBot() {
+                window.location.href =
+                    "https://discord.com/oauth2/authorize?client_id=1396846209821577276&response_type=code&redirect_uri=http%3A%2F%2Fprem-eu2.bot-hosting.net%3A20672%2Fcallback&scope=email+guilds+identify";
+            }
+
+            function loginAsDev() {
+                  document.getElementById("devModal").style.display = "block";
+                }
+
+         async function submitDevLogin() {
+  const devId = document.getElementById("devIdInput").value.trim();
+  
+  try {
+    const response = await fetch('/api/dev-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password: devId })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      showPopup(true);
+    } else {
+      showPopup(false);
+    }
+  } catch (error) {
+    console.error('خطأ:', error);
+    showPopup(false);
+  }
+         }
+
+                function showPopup(success) {
+  const popup = document.createElement("div");
+  popup.className = "popup-overlay";
+  popup.innerHTML = `
+    <div class="popup-box">
+      <div class="popup-icon ${success ? "success" : "error"}">
+        ${success ? "✔️" : "❌"}
+      </div>
+      <div>
+        <h3 style="margin-bottom: 15px;">
+          ${success ? "تم تسجيل الدخول كمبرمج!" : "كلمة مرور غير صحيحة!"}
+        </h3>
+        <button class="popup-btn" onclick="handlePopup(${success})">
+          ${success ? "دخول" : "إعادة المحاولة"}
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(popup);
+                }
+
+          function handlePopup(success) {
+  document.querySelector(".popup-overlay").remove();
+  if (success) {
+    window.location.href = "dashboard.html";
+  }
+          }
+    
+
+                // إغلاق المودال عند الضغط خارج المربع
+                window.onclick = function(event) {
+                  const modal = document.getElementById("devModal");
+                  if (event.target === modal) {
+                    modal.style.display = "none";
+                  }
+                };
+              </script>
+       
+        <div class="dev-modal" id="devModal">
+          <div class="dev-modal-content">
+            <h3>تسجيل الدخول كمبرمج</h3>
+            <input type="password" id="devIdInput" placeholder="ادخل كلمة المرور" />
+            <button onclick="submitDevLogin()">دخول</button>
+          </div>
+              </div>
+        <footer>
+            <div
+                class="footer-brand"
+                style="color: #ff6f00; font-size: 24px; font-weight: bold"
+            >
+                ⚡ لـوحـة تـحـكـم الـبـوت |
+                <span style="color: #ffffff">𝐁𝐋𝐀𝐂𝐊 𝐋𝐈𝐒𝐓 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃</span>
+            </div>
+            <div
+                class="footer-credit"
+                style="color: #cccccc; font-size: 16px; margin-top: 10px"
+            >
+                تـم تـطـويـر بـكـل
+                <span style="color: #ff6f00">❤️</span>
+                بـواسـطـة
+                <a
+                    href="https://discord.gg/zn7kAfQG"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                        color: #ff6f00;
+                        text-decoration: none;
+                        font-weight: bold;
+                    "
+                    >𝗟𝗢𝗥𝗗</a
+                >
+                <span style="color: #888888"
+                    >— جـمـيـع الـحـقـوق مـحـفـوظـة © 2025</span
+                >
+            </div>
+        </footer>
+    </body>
+</html>
