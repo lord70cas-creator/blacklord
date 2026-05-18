@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta charset="UTF-8" />
+        <title> 𝐁𝐋𝐀𝐂𝐊 𝐋𝐈𝐒𝐓 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃 </title>
+         <link rel="icon" href="image.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #25252b;
+            color: #f2f2f2;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+
+        .channel-card, .bot-status, .add-channel-card, .rules-card, .summary-card {
+            background: #1a1a20;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+            box-shadow: 0 0 10px #ff6f0055;
+        }
+
+        h5 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #ff6f00;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px #ff6f00aa;
+        }
+
+        .channel-id {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tag-badge {
+            background-color: #2a2a2a;
+            color: #ff6f00;
+            padding: 10px 18px;
+            margin: 8px;
+            border-radius: 28px;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.15rem;
+            user-select: none;
+        }
+        .custom-msg {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #222;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #000;
+            z-index: 9999;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+            .custom-msg.success {
+                background-color: #2e7d32;
+            }
+
+            .custom-msg.error {
+                background-color: #c62828;
+            }
+
+            .custom-msg.info {
+                background-color: #0277bd;
+            }
+            .tag-badge span.remove-tag {
+                margin-left: 20px;
+                background-color: #bf0e0e; 
+                border-radius: 50%;
+                padding: 6px 12px;
+                font-size: 18px;
+                cursor: pointer;
+                line-height: 1;
+                font-weight: bold;
+                user-select: none;
+                transition: background-color 0.3s ease;
+            }
+
+                .tag-badge span.remove-tag:hover {
+                    background-color: #ff3d00;
+                }
+
+.dev-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    backdrop-filter: blur(3px);
+}
+
+.dev-modal-content {
+    background: linear-gradient(135deg, #1a1a20 0%, #25252b 100%);
+    border: 2px solid #ff6f00;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(255, 111, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+    font-family: 'Cairo', sans-serif;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dev-modal-content h3 {
+    color: #ff6f00;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 111, 0, 0.3);
+}
+
+.dev-modal-content .modal-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.dev-modal-content .modal-icon.success { color: #4caf50; }
+.dev-modal-content .modal-icon.error { color: #f44336; }
+.dev-modal-content .modal-icon.info { color: #2196f3; }
+.dev-modal-content .modal-icon.warning { color: #ff9800; }
+.dev-modal-content .modal-icon.confirm { color: #ff6f00; }
+
+.dev-modal-content input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background: #111;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+.dev-modal-content input:focus {
+    border-color: #ff6f00;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 111, 0, 0.2);
+}
+
+.dev-modal-content button {
+    background: #ff6f00;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px 10px;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+}
+
+.dev-modal-content button:hover {
+    background: #ffa040;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 111, 0, 0.4);
+}
+
+.dev-modal-content button.secondary {
+    background: #666;
+}
+
+.dev-modal-content button.secondary:hover {
+    background: #777;
+}
+
+.dev-modal-content .message-text {
+    color: #f2f2f2;
+    font-size: 1.1rem;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+        .banned-tag {
+            background-color: #420e0e; 
+            color: #adadad;
+            padding: 10px 18px;
+            margin: 8px;
+            border-radius: 28px;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.15rem;
+            user-select: none;
+        }
+
+            .banned-tag span.remove-tag {
+                margin-left: 20px;
+                background-color: #d32f2f;
+                border-radius: 50%;
+                padding: 6px 12px;
+                font-size: 18px;
+                cursor: pointer;
+                line-height: 1;
+                font-weight: bold;
+                user-select: none;
+                transition: background-color 0.3s ease;
+            }
+
+                .banned-tag span.remove-tag:hover {
+                    background-color: #25252b;
+                }
+
+        input.form-control {
+            background: #111;
+            border: 1px solid #444;
+            color: #f2f2f2;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            padding: 10px 14px;
+        }
+
+        .banned-input {
+            color: #ddd;
+            background-color: #222;
+            border-color: #444;
+        }
+
+        button.btn {
+            font-weight: bold;
+            border-radius: 10px;
+            margin-left: 10px;
+            font-size: 1.1rem;
+        }
+
+        .delete-channel {
+            margin-top: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+            footer a {
+                color: #ffa040;
+                font-weight: bold;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                footer a:hover {
+                    color: #ffc270;
+                    text-decoration: underline;
+                }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff6f00aa;
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        
+        .add-role-section {
+            margin-top: 15px;
+        }
+
+            .add-role-section input {
+                margin-bottom: 8px;
+            }
+        #access-denied-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+}
+
+#access-denied-modal .dev-modal {
+    backdrop-filter: blur(5px);
+}
+
+#access-denied-modal .message-text {
+    line-height: 1.6;
+    margin: 20px 0;
+        }
+        
+     .compact-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 20px;
+}
+
+.mini-toggle-switch {
+    position: relative;
+    width: 100px;
+    height: 48px;
+    background-color: #555;
+    border-radius: 24px;
+    border: 2px solid #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mini-toggle-switch.active {
+    background-color: #ff6f00;
+    border-color: #ffa040;
+    box-shadow: 0 0 12px rgba(255, 111, 0, 0.4);
+}
+
+.mini-toggle-switch .mini-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.mini-toggle-switch.active .mini-slider {
+    transform: translateX(52px);
+}
+
+.toggle-status-text {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.toggle-status-text.active {
+    color: #4CAF50;
+}
+
+.toggle-status-text.inactive {
+    color: #ff6f00;
+} 
+        
+body {
+  cursor: url('mouse.png') 16 16, auto;
+}
+
+
+
+
+
+
+    </style>
+
+<style>
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    backdrop-filter: blur(2px);
+}
+.popup-box {
+    background: #1f1f1f;
+    border: 2px solid #ff6f00aa;
+    border-radius: 16px;
+    color: #fff;
+    padding: 30px 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 20px #ff6f00a2;
+    font-family: 'Cairo', sans-serif;
+}
+.popup-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+.popup-icon.success { color: #2ecc71; }
+.popup-icon.error { color: #e74c3c; }
+.popup-icon.info { color: #3498db; }
+.popup-icon.warning { color: #f1c40f; }
+.popup-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+.popup-btn {
+    background: #ff6f00;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.popup-btn:hover {
+    background: #ffa040;
+}
+    
+</style>
+    <style>
+
+.actor-box{
+  display:flex; flex-direction:column; gap:2px;
+  background:#111; border:1px solid #333; border-radius:10px;
+  padding:8px 10px; line-height:1.35
+}
+.actor-box .line{opacity:.9}
+.actor-box .label{opacity:.65; font-size:12px}
+
+
+.brief{
+  white-space:pre-wrap;
+}
+</style>
+  
+<style>
+
+#open-logs-btn{
+  position:fixed; top:16px; left:16px; z-index:9999;
+  padding:10px 14px; border-radius:12px; border:none; cursor:pointer;
+  background:#ff6f00; color:#fff; font-weight:700;
+  box-shadow:0 6px 16px rgba(0,0,0,.25)
+}
+
+#logs-backdrop{display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:99998; backdrop-filter:blur(2px)}
+#logs-modal{
+  display:none; position:fixed; inset:60px 40px 40px 40px; z-index:99999;
+  background:#1a1a20; color:#f2f2f2; border:1px solid #333;
+  border-radius:16px; box-shadow:0 24px 48px rgba(0,0,0,.45);
+  overflow:hidden; flex-direction:column
+    }
+#logs-header{padding:14px 18px; border-bottom:1px solid #333; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+#logs-header h5{margin:0; color:#ff6f00; text-shadow:0 0 8px #ff6f00aa}
+#logs-filters input,#logs-filters select{padding:8px 10px; border:1px solid #444; border-radius:10px; background:#111; color:#fff}
+#logs-table-wrap{flex:1; overflow:auto}
+#logs-table{width:100%; border-collapse:collapse; font-size:13px}
+#logs-table th,#logs-table td{padding:8px 10px; border-bottom:1px solid #333; text-align:start; vertical-align:top}
+#logs-table thead{position:sticky; top:0; background:#14141a}
+.badge{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid #3a3a3a}
+.badge.get{background:#153042} .badge.post{background:#1b2e17}
+.badge.delete{background:#3a1e1e} .badge.put,.badge.patch{background:#3a2f1e}
+
+
+#logs-cats{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+#logs-cats .cat-btn{
+  padding:6px 10px; border:1px solid #3a3a3a; border-radius:10px; background:#2a2a2f; color:#fff; cursor:pointer
+}
+#logs-cats .cat-btn.active{background:#263238; border-color:#99c2ff}
+</style>
+</head>
+
+<body>
+
+    <!-- زر فتح اللوق -->
+<button id="open-logs-btn">📜 عرض اللوق</button>
+
+<!-- مودال اللوق -->
+<div id="logs-backdrop"></div>
+<div id="logs-modal" aria-modal="true" role="dialog">
+  <div id="logs-header">
+    <h5>سجل العمليات</h5>
+
+    <!-- فئات العرض -->
+    <div id="logs-cats">
+      <button class="cat-btn active" data-cat="">الكل</button>
+      <button class="cat-btn" data-cat="tags">تاغات</button>
+      <button class="cat-btn" data-cat="rooms">رومات</button>
+      <button class="cat-btn" data-cat="roles">رولات</button>
+      <button class="cat-btn" data-cat="bot">تشغيل/إيقاف بوت</button>
+    </div>
+
+    <!-- بحث وتحديث وإغلاق -->
+    <div id="logs-filters" style="margin-inline-start:auto; display:flex; gap:8px;">
+      <input id="logs-search" placeholder="بحث...">
+      <button id="logs-refresh" class="btn btn-warning">تحديث</button>
+      <button id="logs-close" class="btn btn-secondary">إغلاق</button>
+    </div>
+  </div>
+
+  <div id="logs-table-wrap">
+    <table id="logs-table">
+      <thead>
+        <tr>
+          <th>الوقت</th>
+          <th>العملية</th>
+          <th>الطريقة</th>
+          <th>الرابط</th>
+          <th>الوصف</th>
+          <th>المنفّذ</th>
+          <th>التفاصيل</th>
+        </tr>
+      </thead>
+      <tbody id="logs-tbody"></tbody>
+    </table>
+  </div>
+
+  <div style="padding:10px 14px; border-top:1px solid #333; display:flex; justify-content:space-between;">
+    <small id="logs-count">0 سجل</small>
+  </div>
+</div>
+    <div class="container">
+
+        <div class="bot-status d-flex justify-content-between align-items-center">
+            <div>
+                <h5>🖥️ حـالـة الـبـوت : <span id="bot-status-text" class="text-success">جـاري الـتـحـمـيـل...</span></h5>
+                <small>⏱ مـدة الـتـشـغـيـل : <span id="uptime">0 ثـانـيـة</span></small>
+            </div>
+            <div>
+                
+                <button class="btn btn-danger" id="stop-bot">🔴 إيـقـاف الـبـوت </button>
+  <button class="btn" id="restart-bot" style="background-color: #ff6f00; color: white; font-weight: bold;">
+  إعـادة تـحـمـيـل الـبـيـانـات 🟠
+</button>
+                <button class="btn btn-success" id="start-bot">🟢 تـشـغـيـل الـبـوت </button>
+               
+            </div>
+        </div>
+    </div>
+<audio id="sound-start" src="sounds/start.mp3" preload="auto"></audio>
+<audio id="sound-stop" src="sounds/stop.mp3" preload="auto"></audio>
+<audio id="sound-restart" src="sounds/restart.mp3" preload="auto"></audio>
+    <!-- روم التقارير -->
+    <div class="summary-card">
+        <h5>📢 روم الـتـقـاريـر </h5>
+        <input type="text" id="summary-name" class="form-control" placeholder="اسم الروم" />
+        <input type="text" id="summary-input" class="form-control" placeholder="أدخل ID الروم" />
+        <button class="btn btn-warning" onclick="updateSummaryChannel()">حفظ</button>
+    </div>
+
+    <!-- قسم الرومات -->
+    <div id="forums-section"></div>
+    <!-- قسم إنشاء فروم جديد -->
+    <div class="add-channel-card">
+        <h5>📁 إنشاء فروم</h5>
+        <input id="new-forum-id" class="form-control" placeholder="ID الفـروم" />
+        <input id="new-forum-name" class="form-control" placeholder="اسم الفـروم" />
+        <button class="btn btn-warning" onclick="addForum()">إنشاء فروم</button>
+    </div>
+
+    <!-- التاقات المحظورة العامة -->
+    <div class="channel-card">
+        <h5>🚫 الـتـاقـات الـمـحـظـورة الـعـامـة:</h5>
+        <div id="banned-tags"></div>
+        <input id="banned-input" class="form-control banned-input" placeholder="أضف تاق محظور..." />
+    </div>
+
+    <!-- قسم الرولات -->
+    <div class="rules-card">
+        <h5>🎩 تـعـديـل الـرولـات</h5>
+        <div id="rules-section"></div>
+    </div>
+
+    <footer>
+        <div class="footer-brand" style="color: #ff6f00; font-size: 24px; font-weight: bold;">
+            ⚡ لـوحـة تـحـكـم الـبـوت | <span>𝐁𝐋𝐀𝐂𝐊 𝐋𝐈𝐒𝐓 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃</span>
+        </div>
+        <div class="footer-credit">
+            تـم تـطـويـر بـكـل <span style="color:#ff6f00;">❤️</span> بـواسـطـة
+            <a href="https://discord.com/users/1324828948843991200" target="_blank">𝗟𝗢𝗥𝗗</a>
+            <span>—   جـمـيـع الـحـقـوق مـحـفـوظـة © 2025</span>
+        </div>
+    </footer>
+    <script>
+
+
+     
+        let configData = null;
+        let rulesData = null;
+
+       
+
+        
+        function showMessage(text, type = 'info') {
+            const msg = document.createElement('div');
+            msg.textContent = text;
+            msg.className = `custom-msg ${type}`;
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 4000);
+        }
+         
+async function fetchData() {
+    const configResp = await fetch('/config.json');
+    configData = await configResp.json();
+    
+    
+    window.configData = configData;
+
+    const rulesResp = await fetch('/api/rules');
+    rulesData = await rulesResp.json();
+
+    renderForums();
+    renderBannedTags();
+    renderSummaryChannel();
+    renderRules();
+    fetchBotStatus();
+}
+        function renderForums() {
+            // حفظ الفرومات المفتوحة
+const previouslyOpenForums = [];
+document.querySelectorAll('[id^="room-list-"]').forEach(el => {
+    if (el.style.display !== 'none') {
+        previouslyOpenForums.push(el.id.replace('room-list-', ''));
+    }
+});
+            const container = document.getElementById('forums-section');
+            container.innerHTML = '';
+
+            for (const forumId in configData.forums) {
+                const forum = configData.forums[forumId];
+
+                const forumCard = document.createElement('div');
+                forumCard.className = 'channel-card';
+                forumCard.style.position = 'relative';
+
+                // تعديل 
+                const nameInput = document.createElement('input');
+                nameInput.value = forum.name;
+                nameInput.className = 'form-control';
+                nameInput.style.marginBottom = '8px';
+
+                const idInput = document.createElement('input');
+                idInput.value = forumId;
+                idInput.className = 'form-control';
+                idInput.style.marginBottom = '8px';
+
+                forumCard.appendChild(nameInput);
+                forumCard.appendChild(idInput);
+
+                // زر حفظ التعديل
+                const saveBtn = document.createElement('button');
+                saveBtn.className = 'btn btn-success';
+                saveBtn.textContent = 'حفظ التعديلات';
+    saveBtn.style.backgroundColor = '#f0ad4e';  // أصفر غامق
+    saveBtn.style.color = '#fff';
+    saveBtn.style.border = 'none';
+    saveBtn.style.transition = '0.3s ease';
+    
+saveBtn.onclick = async () => {
+    const newId = idInput.value.trim();
+    const newName = nameInput.value.trim();
+    
+    if (!newId || !newName) {
+        return showPopupMessage('error', 'يرجى إدخال اسم وID صحيح');
+    }
+    
+    // التحقق من وجود تغييرات
+    const hasChanges = newId !== forumId || newName !== forum.name;
+    
+    if (!hasChanges) {
+        return showPopupMessage('info', 'لا توجد تغييرات لحفظها');
+    }
+    
+    // رسالة تأكيد مع عرض التغييرات 
+    let changesText = '<br><br>';
+    if (newId !== forumId) {
+        changesText += `• <span style="color: #ff6f00; font-weight: bold;">الـ ID</span>: ${forumId} → ${newId}<br><br>`;
+    }
+    if (newName !== forum.name) {
+        changesText += `• <span style="color: #ff6f00; font-weight: bold;">الاسم</span>: ${forum.name} → ${newName}<br><br>`;
+    }
+    
+    
+    changesText = changesText.replace(/<br><br>$/, '');
+    
+    showConfirm(
+        `هل تريد حفظ التعديلات على الفروم؟${changesText}`, 
+        async () => {
+            try {
+                await updateForum(forumId, newId, newName);
+                showPopupMessage('success', '✅ تم حفظ التعديلات بنجاح');
+            } catch {
+                showPopupMessage('error', '❌ حدث خطأ أثناء حفظ التعديلات');
+            }
+        }
+    );
+};
+                forumCard.appendChild(saveBtn);
+
+                // زر حذف الفروم
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn btn-danger';
+                deleteBtn.textContent = 'حذف الفروم';
+    deleteBtn.style.backgroundColor = '#dc3545';  
+    deleteBtn.style.color = '#fff';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.transition = '0.3s ease';
+    
+                deleteBtn.style.marginRight = '10px';
+deleteBtn.onclick = async () => {
+    showConfirm(
+        `هل أنت متأكد من حذف الفروم "${forum.name}"؟<br><small style="color: #ff9800;">⚠️ سيتم حذف جميع الرومات بداخله نهائياً</small>`, 
+        async () => {
+            await deleteForum(forumId);
+        }
+    );
+};             forumCard.appendChild(deleteBtn);
+
+                // قسم الرومات داخل الفروم
+                const roomContainer = document.createElement('div');
+    roomContainer.style.display = 'none'; 
+    roomContainer.style.display = 'none'; 
+                roomContainer.id = `room-list-${forumId}`;
+                roomContainer.style.marginTop = '15px';
+
+                for (const roomId in forum.channels) {
+                    const roomData = forum.channels[roomId];
+                    const roomEl = document.createElement('div');
+                    roomEl.className = 'channel-card';
+                    roomEl.style.marginBottom = '15px';
+
+                    
+                    const roomTitle = document.createElement('h5');
+                    roomTitle.textContent = roomData.name || 'بدون اسم';
+                    roomEl.appendChild(roomTitle);
+
+                    const roomIdText = document.createElement('div');
+                    roomIdText.className = 'channel-id';
+                    roomIdText.textContent = `ID: ${roomId}`;
+                    roomEl.appendChild(roomIdText);
+
+                    
+
+
+                    
+                    // التاقات المسموحة
+const tagsHeader = document.createElement('div');
+tagsHeader.style.display = 'flex';
+tagsHeader.style.alignItems = 'center';
+tagsHeader.style.marginBottom = '10px';
+
+// يوزع النص على اليسار والزر على اليمين
+tagsHeader.style.justifyContent = 'space-between';
+
+const tagsTitle = document.createElement('div');
+tagsTitle.textContent = '✅ التاقات المسموحة:';
+tagsHeader.appendChild(tagsTitle);
+
+// إضافة الزر المضغوط
+const currentSearchMode = roomData.searchMode || 'AND';
+const isAndMode = currentSearchMode === 'AND';
+
+const compactToggle = document.createElement('div');
+compactToggle.className = 'compact-toggle';
+
+// الزر المصغر
+const miniToggle = document.createElement('div');
+miniToggle.className = `mini-toggle-switch ${isAndMode ? 'active' : ''}`;
+
+const miniSlider = document.createElement('div');
+miniSlider.className = 'mini-slider';
+miniToggle.appendChild(miniSlider);
+
+// النص المختصر
+const statusText = document.createElement('span');
+statusText.className = `toggle-status-text ${isAndMode ? 'active' : 'inactive'}`;
+statusText.textContent = isAndMode ? '' : '';
+
+compactToggle.appendChild(miniToggle);
+compactToggle.appendChild(statusText);
+
+// وظيفة التبديل
+miniToggle.onclick = async () => {
+    const newMode = currentSearchMode === 'AND' ? 'OR' : 'AND';
+    
+    try {
+        // العثور على الفروم
+        let targetForumId = null;
+        for (const fId in configData.forums) {
+            if (configData.forums[fId].channels && configData.forums[fId].channels[roomId]) {
+                targetForumId = fId;
+                break;
+            }
+        }
+        
+        if (!targetForumId) {
+            showPopupMessage('error', 'لم يتم العثور على الفروم');
+            return;
+        }
+        
+        // تحديث البيانات
+        configData.forums[targetForumId].channels[roomId].searchMode = newMode;
+        
+        // إرسال للسيرفر
+        await fetch(`/api/forums/${targetForumId}/channels/${roomId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...configData.forums[targetForumId].channels[roomId]
+            }),
+        });
+        
+        const modeText = newMode === 'AND' ? 'مفعل (كل التاغات)' : 'متوقف (تاغ واحد)';
+        showPopupMessage('success', `تم تغيير النمط إلى ${modeText}`);
+        
+        // إعادة تحديث الواجهة
+        await fetchData();
+        
+    } catch (error) {
+        showPopupMessage('error', 'حدث خطأ أثناء التحديث');
+        console.error('Error updating search mode:', error);
+    }
+};
+
+tagsHeader.appendChild(compactToggle);
+roomEl.appendChild(tagsHeader);
+
+// ثم يأتي بعدها مباشرة:
+const tagsContainer = document.createElement('div');
+                    (roomData.tags || []).forEach(tag => {
+                        tagsContainer.appendChild(createTagElement(tag, async (t) => {
+                            await removeTagFromChannel(roomId, t, false);
+                        }));
+                    });
+                    roomEl.appendChild(tagsContainer);
+
+  
+
+                    // ➕ إضافة تاق
+                    const input = document.createElement('input');
+                    input.className = 'form-control';
+                    input.placeholder = 'أضف تاق...';
+                    input.style.marginTop = '8px';
+                    roomEl.appendChild(input);
+
+                    const addBtn = document.createElement('button');
+                    addBtn.className = 'btn btn-warning mt-2';
+                    addBtn.textContent = 'إضافة تاق';
+                    addBtn.onclick = async () => {
+                        const newTag = input.value.trim();
+                        if (!newTag) return showPopupMessage('error', 'يرجى إدخال تاق صحيح');
+                        await addTagToChannel(roomId, newTag, false);
+                        input.value = '';
+                    };
+                    roomEl.appendChild(addBtn);
+                    
+                                      //  التاقات المحظورة
+                    const bannedTitle = document.createElement('div');
+                    bannedTitle.style.marginTop = '10px';
+                    bannedTitle.textContent = '🚫 التاقات المحظورة الخاصة:';
+                    roomEl.appendChild(bannedTitle);
+
+                    const bannedContainer = document.createElement('div');
+                    (roomData.bannedTags || []).forEach(tag => {
+                        bannedContainer.appendChild(createBannedTagElement(tag, async (t) => {
+                            await removeTagFromChannel(roomId, t, true);
+                        }));
+                    });
+                    roomEl.appendChild(bannedContainer);
+
+                    //  تاق محظور
+                    const inputBanned = document.createElement('input');
+                    inputBanned.className = 'form-control banned-input';
+                    inputBanned.placeholder = 'أضف تاق محظور خاص...';
+                    inputBanned.style.marginTop = '12px';
+                    roomEl.appendChild(inputBanned);
+
+                    const addBannedBtn = document.createElement('button');
+                    addBannedBtn.className = 'btn btn-danger mt-2';
+                    addBannedBtn.textContent = 'إضافة تاق محظور خاص';
+                    addBannedBtn.onclick = async () => {
+                        const newTag = inputBanned.value.trim();
+                        if (!newTag) return showPopupMessage('error', 'يرجى إدخال تاق محظور صحيح');
+                        await addTagToChannel(roomId, newTag, true);
+                        inputBanned.value = '';
+                    };
+                    roomEl.appendChild(addBannedBtn);
+
+//  زر حذف الروم فقط من الفروم
+const deleteBtn = document.createElement('button');
+deleteBtn.className = 'btn btn-danger delete-channel';
+deleteBtn.textContent = 'حذف الروم';
+deleteBtn.style.backgroundColor = '#dc3545';
+deleteBtn.style.color = '#fff';
+deleteBtn.style.border = 'none';
+deleteBtn.style.transition = '0.3s ease';
+
+deleteBtn.onclick = async () => {
+    showConfirm(`هل أنت متأكد من حذف الروم "${roomData.name}" من الفروم "${forum.name}"؟`, async () => {
+        try {
+            // إزالة الروم من الواجهة
+            const roomCard = document.getElementById(`room-card-${roomId}`);
+            if (roomCard) {
+                roomCard.remove();
+            }
+            
+            await fetch(`/api/forums/${forumId}/channels/${roomId}`, {
+                method: 'DELETE',
+            });
+            showPopupMessage('success', '🗑 تم حذف الروم بنجاح');
+            
+            
+            if (configData.forums[forumId] && configData.forums[forumId].channels) {
+                delete configData.forums[forumId].channels[roomId];
+            }
+        } catch {
+            showPopupMessage('error', 'حدث خطأ أثناء حذف الروم');
+            
+            await fetchData();
+        }
+    });
+};
+                    roomEl.id = `room-card-${roomId}`; 
+roomEl.appendChild(deleteBtn);
+
+                    //  أضف الروم إلى القائمة
+                    roomContainer.appendChild(roomEl);
+                   
+                }
+
+                forumCard.appendChild(roomContainer);
+
+                
+// زر إضافة روم داخل الفروم
+const addRoomBtn = document.createElement('button');
+addRoomBtn.className = 'btn btn-warning mt-2';
+addRoomBtn.textContent = 'إضافة روم';
+addRoomBtn.style.backgroundColor = '#f0ad4e';
+addRoomBtn.style.color = '#fff';
+addRoomBtn.style.border = 'none';
+addRoomBtn.style.transition = '0.3s ease';
+
+addRoomBtn.onclick = () => {
+    showPrompt('أدخل ID الروم', 'مثال: 1234567890123456789', (roomId) => {
+        if (!roomId || roomId.trim() === '') {
+            showPopupMessage('error', 'يرجى إدخال ID صحيح');
+            return;
+        }
+        
+        
+        setTimeout(() => {
+            showPrompt('أدخل اسم الروم', 'مثال: الدردشة العامة', (roomName) => {
+                if (!roomName || roomName.trim() === '') {
+                    showPopupMessage('error', 'يرجى إدخال اسم صحيح');
+                    return;
+                }
+                
+                addChannelToForum(forumId, roomId.trim(), roomName.trim()).then(() => {
+                    showPopupMessage('success', '✅ تم إضافة الروم داخل الفروم بنجاح');
+                }).catch(() => {
+                    showPopupMessage('error', '❌ حدث خطأ أثناء إضافة الروم');
+                });
+            });
+        }, 100);
+    });
+};
+                forumCard.appendChild(addRoomBtn);
+
+                // زر إخفاء/إظهار
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'btn btn-secondary mt-3';
+                toggleBtn.textContent = 'عرض الرومات';
+    toggleBtn.style.backgroundColor = '#ff8c42';  
+    toggleBtn.style.color = '#fff';
+    toggleBtn.style.border = 'none';
+    toggleBtn.style.transition = '0.3s ease';
+    
+                toggleBtn.onclick = () => {
+                    const el = document.getElementById(`room-list-${forumId}`);
+                    if (el.style.display === 'none') {
+                        el.style.display = 'block';
+                        toggleBtn.textContent = 'اخفاء الرومات';
+    toggleBtn.style.backgroundColor = '#ff8c42';  
+    toggleBtn.style.color = '#fff';
+    toggleBtn.style.border = 'none';
+    toggleBtn.style.transition = '0.3s ease';
+    
+                    } else {
+                        el.style.display = 'none';
+                        toggleBtn.textContent = 'عرض الرومات';
+    toggleBtn.style.backgroundColor = '#ff8c42';  
+    toggleBtn.style.color = '#fff';
+    toggleBtn.style.border = 'none';
+    toggleBtn.style.transition = '0.3s ease';
+    
+                    }
+                };
+                forumCard.appendChild(toggleBtn);
+                
+                container.appendChild(forumCard);
+                    }
+
+//  إعادة فتح الفرومات اللي كانت مفتوحة
+previouslyOpenForums.forEach(fid => {
+    const el = document.getElementById(`room-list-${fid}`);
+    if (el) {
+        el.style.display = 'block';
+        const toggleBtn = el.parentElement.querySelector('.btn.btn-secondary');
+        if (toggleBtn) toggleBtn.textContent = 'اخفاء الرومات';
+    }
+});
+            
+        }
+
+        // إنشاء تاق مع زر حذف
+        function createTagElement(tag, onRemove) {
+            const span = document.createElement('span');
+            span.className = 'tag-badge';
+            span.textContent = tag;
+
+            const removeSpan = document.createElement('span');
+            removeSpan.className = 'remove-tag';
+            removeSpan.textContent = '×';
+            removeSpan.title = 'حذف التاق';
+            removeSpan.onclick = () => onRemove(tag);
+
+            span.appendChild(removeSpan);
+            return span;
+        }
+
+        // إنشاء تاق محظور خاص مع زر حذف
+        function createBannedTagElement(tag, onRemove) {
+            const span = document.createElement('span');
+            span.className = 'banned-tag';
+            span.textContent = tag;
+
+            const removeSpan = document.createElement('span');
+            removeSpan.className = 'remove-tag';
+            removeSpan.textContent = '×';
+            removeSpan.title = 'حذف التاق المحظور';
+            removeSpan.onclick = () => onRemove(tag);
+
+            span.appendChild(removeSpan);
+            return span;
+        }
+
+
+        // حذف تاق من روم 
+        async function removeTagFromChannel(channelId, tag, banned) {
+            try {
+                if (banned) {
+                    const resp = await fetch(`/api/channel-banned/${channelId}`);
+                    let bannedTags = await resp.json();
+                    bannedTags = bannedTags.filter(t => t !== tag);
+
+                    await fetch(`/api/channel-banned/${channelId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ bannedTags }),
+                    });
+                } else {
+                    const ch = configData.channels[channelId];
+                    if (!ch) return showPopupMessage('error', 'الروم غير موجود في البيانات');
+
+                    const updatedTags = (ch.tags || []).filter(t => t !== tag);
+
+                    await fetch(`/api/channels/${channelId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: ch.name, tags: updatedTags }),
+                    });
+                }
+
+                renderForums();
+            } catch (e) {
+                showPopupMessage('error', 'خطأ أثناء الحذف');
+            }
+        }
+        // إضافة تاق لروم
+        async function addTagToChannel(channelId, tag, banned) {
+            try {
+                if (banned) {
+                    const resp = await fetch(`/api/channel-banned/${channelId}`);
+                    const bannedTags = await resp.json();
+                    if (bannedTags.includes(tag)) return showPopupMessage('error', 'التاق موجود مسبقًا');
+                    bannedTags.push(tag);
+                    await fetch(`/api/channel-banned/${channelId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ bannedTags }),
+                    });
+                } else {
+                    const ch = configData.channels[channelId];
+                    if ((ch.tags || []).includes(tag)) return showPopupMessage('error', 'التاق موجود مسبقًا');
+                    const newTags = (ch.tags || []).concat(tag);
+                    await fetch(`/api/channels/${channelId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: ch.name, tags: newTags }),
+                    });
+                }
+                renderForums();
+            } catch (e) {
+                showPopupMessage('error', 'خطأ أثناء الإضافة');
+            }
+        }
+
+        // حذف روم
+        async function deleteChannel(id) {
+            try {
+                await fetch(`/api/channels/${id}`, { method: 'DELETE' });
+                renderForums();
+            } catch {
+                showPopupMessage('error', 'خطأ في حذف الروم');
+            }
+        }
+
+        
+        async function reloadData() {
+            await fetchData();
+        }
+
+        // إضافة روم جديد
+        async function addChannel() {
+            const id = document.getElementById('new-channel-id').value.trim();
+            const name = document.getElementById('new-channel-name').value.trim();
+            const tagsStr = document.getElementById('new-channel-tags').value.trim();
+            if (!id || !name) return showPopupMessage('error', 'يرجى تعبئة ID واسم الروم');
+            const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()).filter(t => t) : [];
+            try {
+                await fetch('/api/channels', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, name, tags }),
+                });
+                document.getElementById('new-channel-id').value = '';
+                document.getElementById('new-channel-name').value = '';
+                document.getElementById('new-channel-tags').value = '';
+                renderForums();
+            } catch {
+                showPopupMessage('error', 'خطأ في إضافة الروم');
+            }
+        }
+
+// عرض التاقات المحظورة العامة
+function renderBannedTags() {
+    const container = document.getElementById('banned-tags');
+    container.innerHTML = '';
+    (configData.bannedTags || []).forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'banned-tag';
+        span.textContent = tag;
+        span.setAttribute('data-tag', tag); // إضافة معرف للتاق
+
+        const removeSpan = document.createElement('span');
+        removeSpan.className = 'remove-tag';
+        removeSpan.textContent = '×';
+        removeSpan.title = 'حذف التاق المحظور';
+        removeSpan.onclick = async () => {
+            await removeBannedTag(tag);
+        };
+
+        span.appendChild(removeSpan);
+        container.appendChild(span);
+    });
+}
+
+// حذف تاق محظور عام
+async function removeBannedTag(tag) {
+    try {
+        // إزالة التاق من الواجهة 
+        const tagElement = document.querySelector(`[data-tag="${tag}"]`);
+        if (tagElement) {
+            tagElement.remove();
+        }
+        
+        const newList = (configData.bannedTags || []).filter(t => t !== tag);
+        await fetch('/api/banned', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bannedTags: newList }),
+        });
+        
+        
+        configData.bannedTags = newList;
+        
+    } catch {
+        showPopupMessage('error', 'خطأ في حذف التاق المحظور');
+        
+        await fetchData();
+    }
+}
+// إضافة تاق محظور عام
+document.getElementById('banned-input').addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter') {
+        const val = e.target.value.trim();
+        if (!val) return;
+        if ((configData.bannedTags || []).includes(val)) {
+            showPopupMessage('error', 'التاق موجود مسبقاً');
+            return;
+        }
+        
+        try {
+            const newList = (configData.bannedTags || []).concat(val);
+            
+            // إضافة التاق للواجهة 
+            const container = document.getElementById('banned-tags');
+            const span = document.createElement('span');
+            span.className = 'banned-tag';
+            span.textContent = val;
+            span.setAttribute('data-tag', val);
+
+            const removeSpan = document.createElement('span');
+            removeSpan.className = 'remove-tag';
+            removeSpan.textContent = '×';
+            removeSpan.title = 'حذف التاق المحظور';
+            removeSpan.onclick = async () => {
+                await removeBannedTag(val);
+            };
+
+            span.appendChild(removeSpan);
+            container.appendChild(span);
+            
+            await fetch('/api/banned', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bannedTags: newList }),
+            });
+            
+            
+            configData.bannedTags = newList;
+            
+            e.target.value = '';
+            showPopupMessage('success', '✅ تم إضافة التاق المحظور');
+            
+        } catch {
+            showPopupMessage('error', 'خطأ في إضافة التاق');
+        }
+    }
+});
+
+        //  عرض وتعديل روم التقارير 
+        function renderSummaryChannel() {
+            const summary = configData.summaryChannel || {};
+            document.getElementById('summary-name').value = summary.name || '';
+            document.getElementById('summary-input').value = summary.id || '';
+        }
+
+        async function updateSummaryChannel() {
+            const name = document.getElementById('summary-name').value.trim();
+            const id = document.getElementById('summary-input').value.trim();
+
+            if (!id) return showPopupMessage('error', 'يرجى إدخال ID روم التقارير');
+
+            try {
+                configData.summaryChannel = { id, name };
+
+                await fetch('/api/summary-channel', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        summaryChannel: id,
+                        summaryChannelName: name
+                    }),
+                });
+
+                showPopupMessage('success', 'تم حفظ روم التقارير');
+                renderForums();
+            } catch {
+                showPopupMessage('error', 'خطأ في تحديث روم التقارير');
+            }
+        }
+
+        //عرض الرولات  
+        function renderRules() {
+            const container = document.getElementById('rules-section');
+            container.innerHTML = '';
+
+            for (const command in rulesData) {
+                const roles = rulesData[command];
+
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+
+                const title = document.createElement('h5');
+                title.textContent = `⚙️ صلاحيات أمر : ${command}`;
+                card.appendChild(title);
+
+                // عرض الرولات الحالية
+                roles.forEach(role => {
+                    const span = document.createElement('span');
+                    span.className = 'tag-badge';
+                    span.textContent = role.name;
+
+                    const removeSpan = document.createElement('span');
+                    removeSpan.className = 'remove-tag';
+                    removeSpan.textContent = '×';
+                    removeSpan.title = 'حذف الرول';
+                    removeSpan.onclick = async () => {
+                        await removeRoleFromCommand(command, role.id);
+                    };
+
+                    span.appendChild(removeSpan);
+                    card.appendChild(span);
+                });
+
+                // قسم إضافة رول جديد تحت كل أمر
+                const addSection = document.createElement('div');
+                addSection.className = 'add-role-section';
+
+                const inputId = document.createElement('input');
+                inputId.className = 'form-control';
+                inputId.placeholder = 'أدخل ID الرول الجديد';
+                addSection.appendChild(inputId);
+
+                const inputName = document.createElement('input');
+                inputName.className = 'form-control';
+                inputName.placeholder = 'أدخل اسم الرول الجديد';
+                addSection.appendChild(inputName);
+
+                const addBtn = document.createElement('button');
+                addBtn.className = 'btn btn-warning mt-2';
+                addBtn.textContent = 'إضافة رول جديد';
+                addBtn.onclick = async () => {
+                    const newId = inputId.value.trim();
+                    const newName = inputName.value.trim();
+                    if (!newId || !newName) return showPopupMessage('error', 'يرجى تعبئة ID واسم الرول');
+                    await addRoleToCommand(command, { id: newId, name: newName });
+                    inputId.value = '';
+                    inputName.value = '';
+                };
+                addSection.appendChild(addBtn);
+
+                card.appendChild(addSection);
+                container.appendChild(card);
+            }
+        }
+
+        // حذف رول من أمر
+        async function removeRoleFromCommand(command, roleId) {
+            try {
+                let roles = rulesData[command];
+                roles = roles.filter(r => r.id !== roleId);
+                await fetch(`/api/rules/${command}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ roles }),
+                });
+                await reloadRules();
+            } catch {
+                showPopupMessage('error', 'خطأ في حذف الرول');
+            }
+        }
+
+        // إضافة رول لأمر
+        async function addRoleToCommand(command, role) {
+            try {
+                let roles = rulesData[command] || [];
+                if (roles.find(r => r.id === role.id)) {
+                    showPopupMessage('error', 'الرول موجود مسبقاً لهذا الأمر');
+                    return;
+                }
+                roles.push(role);
+                await fetch(`/api/rules/${command}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ roles }),
+                });
+                await reloadRules();
+            } catch {
+                showPopupMessage('error', 'خطأ في إضافة الرول');
+            }
+        }
+
+        async function reloadRules() {
+            const resp = await fetch('/api/rules');
+            rulesData = await resp.json();
+            renderRules();
+        }
+// دالة تشغيل/إيقاف البوت
+async function toggleBotStatus(status, skipPopup = false) {
+    try {
+        const resp = await fetch('/api/bot-status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status }),
+        });
+        const data = await resp.json();
+
+        if (!data.success) {
+            showPopupMessage('error', 'فشل تغيير حالة البوت.');
+            return;
+        }
+
+        await fetchBotStatus();
+
+        if (!skipPopup) {
+            const msg = status === 'running' ? '✅ تم تشغيل البوت' : '🛑 تم إيقاف البوت';
+            showPopupMessage('success', msg);
+        }
+    } catch {
+        showPopupMessage('error', '⚠️ خطأ في الاتصال بالسيرفر.');
+    }
+}
+
+
+function showConfirmModal({ title, message, confirmText, onConfirm, confirmColor = '#4CAF50' }) {
+    const modal = document.createElement('div');
+    modal.className = 'dev-modal';
+    modal.innerHTML = `
+        <div class="dev-modal-content">
+            <span class="modal-icon warning">⚠️</span>
+            <h3>${title}</h3>
+            <div class="message-text">${message}</div>
+            <button id="confirmBtn" style="background: ${confirmColor};">${confirmText}</button>
+            <button class="secondary" id="cancelBtn">إلغاء</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    window.currentModal = modal;
+
+    document.getElementById('confirmBtn').addEventListener('click', async () => {
+        closeModal();
+        await onConfirm();
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+}
+
+// زر تشغيل البوت
+document.getElementById('start-bot').addEventListener('click', () => {
+    showConfirmModal({
+        title: 'تشغيل البوت',
+        message: 'هل تريد تشغيل البوت الآن؟',
+        confirmText: 'تشغيل',
+        confirmColor: '#4CAF50',
+        onConfirm: async () => {
+            document.getElementById('sound-start').play(); 
+            await toggleBotStatus('running', true);
+            showPopupMessage('success', '🟢 تم تشغيل البوت');
+        }
+    });
+});
+// زر إيقاف البوت
+document.getElementById('stop-bot').addEventListener('click', () => {
+    showConfirmModal({
+        title: 'إيقاف البوت',
+        message: 'هل أنت متأكد من إيقاف البوت؟<br><small style="color: #ff9800;">سيتم إيقاف جميع الاوامر والعمليات</small>',
+        confirmText: 'إيقاف',
+        confirmColor: '#f44336',
+        onConfirm: async () => {
+            document.getElementById('sound-stop').play(); 
+            await toggleBotStatus('stopped', true);
+            showPopupMessage('success', '🛑 تم إيقاف البوت');
+        }
+    });
+});
+
+
+// زر إعادة تشغيل البوت
+document.getElementById('restart-bot').addEventListener('click', () => {
+    showConfirmModal({
+        title: 'إعادة تشغيل البوت',
+        message: 'سيتم إعادة تشغيل البوت عبر السيرفر. قد يستغرق الأمر بضع ثوانٍ.',
+        confirmText: 'إعادة تشغيل',
+        confirmColor: '#2196F3',
+        onConfirm: async () => {
+            document.getElementById('sound-restart').play(); 
+            try {
+                showLoadingMessage();
+                const resp = await fetch('/api/restart-bot', { method: 'POST' });
+                const data = await resp.json();
+                if (!data.success) {
+                    closeModal();
+                    showPopupMessage('error', '❌ فشل في إرسال أمر إعادة التشغيل');
+                }
+            } catch {}
+        }
+    });
+});
+ 
+// تغيير حالة البوت 
+async function toggleBotStatus(status, skipPopup = false) {
+    try {
+        const resp = await fetch('/api/bot-status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status }),
+        });
+        const data = await resp.json();
+
+        if (!data.success) {
+            showPopupMessage('error', 'فشل تغيير حالة البوت.');
+            return;
+        }
+
+        await fetchBotStatus();
+
+        if (!skipPopup) { 
+            showPopupMessage('success', status === 'running' ? '🟢 تم تشغيل البوت' : '🛑 تم إيقاف البوت');
+        }
+    } catch {
+        showPopupMessage('error', '⚠️ خطأ في الاتصال بالسيرفر.');
+    }
+}
+
+
+function msToTime(duration) {
+    let seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24),
+        days = Math.floor(duration / (1000 * 60 * 60 * 24));
+
+    let str = '';
+    if (days > 0) str += days + ' يوم ';
+    if (hours > 0) str += hours + ' ساعة ';
+    if (minutes > 0) str += minutes + ' دقيقة ';
+    str += seconds + ' ثانية';
+    return str;
+}
+
+
+async function fetchBotStatus() {
+    try {
+        const resp = await fetch('/api/uptime');
+        const data = await resp.json();
+
+        const currentStatus = data.status || 'stopped';
+
+        const botStatusText = document.getElementById('bot-status-text');
+        botStatusText.textContent = currentStatus === 'running' ? 'شغال' : 'متوقف';
+        botStatusText.className = currentStatus === 'running' ? 'text-success' : 'text-danger';
+
+        const uptimeSpan = document.getElementById('uptime');
+        uptimeSpan.textContent = msToTime(data.uptime);
+
+        toggleButtons(currentStatus);
+        } catch {
+        
+    }
+}
+
+// تفعيل أو تعطيل الأزرار حسب حالة البوت
+function toggleButtons(status) {
+    const startBtn = document.getElementById('start-bot');
+    const stopBtn = document.getElementById('stop-bot');
+
+    if (status === 'running') {
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+    } else {
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+    }
+}
+
+// جلب الحالة 
+async function getCurrentBotStatus() {
+    try {
+        const resp = await fetch('/api/uptime');
+        const data = await resp.json();
+        return data.status || 'stopped';
+    } catch {
+        return 'stopped';
+    }
+}
+
+
+setInterval(fetchBotStatus, 1000);
+
+      
+        fetchBotStatus();
+
+        
+        window.onload = () => {
+            fetchData();
+        };
+
+        //  دوال الفروم الجديدة
+        async function addForum() {
+            const id = document.getElementById('new-forum-id').value.trim();
+            const name = document.getElementById('new-forum-name').value.trim();
+            if (!id || !name) return showPopupMessage('error', 'يرجى إدخال ID واسم الفروم');
+
+            await fetch('/api/forums', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, name }),
+            });
+
+            document.getElementById('new-forum-id').value = '';
+            document.getElementById('new-forum-name').value = '';
+           await fetchData();
+        }
+
+        async function updateForum(oldId, newId, newName) {
+            await fetch(`/api/forums/${oldId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ newId, name: newName }),
+            });
+            await fetchData();
+        }
+
+        async function deleteForum(forumId) {
+            await fetch(`/api/forums/${forumId}`, {
+                method: 'DELETE',
+            });
+          await fetchData();
+        }
+function showConfirm(message, onConfirm) {
+    showPopupMessage('confirm', message, true, (confirmed) => {
+        if (confirmed) {
+            onConfirm();
+        }
+        
+    });
+}
+        async function addChannelToForum(forumId, channelId, name) {
+            await fetch(`/api/forums/${forumId}/channels`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: channelId, name }),
+            });
+           setTimeout(fetchData, 300);
+        }
+    
+async function addTagToChannel(channelId, tag, banned) {
+    try {
+        for (const forumId in configData.forums) {
+            const forum = configData.forums[forumId];
+            if (forum.channels?.[channelId]) {
+                const channel = forum.channels[channelId];
+
+                if (banned) {
+                    if (channel.bannedTags?.includes(tag)) {
+                        return showPopupMessage('error', 'التاق موجود مسبقًا');
+                    }
+                    channel.bannedTags.push(tag);
+                } else {
+                    if (channel.tags?.includes(tag)) {
+                        return showPopupMessage('error', 'التاق موجود مسبقًا');
+                    }
+                    channel.tags.push(tag);
+                }
+
+                await fetch(`/api/forums/${forumId}/channels/${channelId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(channel),
+                });
+
+                await fetchData();
+                return;
+            }
+        }
+
+        showPopupMessage('error', 'لم يتم العثور على الروم في أي فروم');
+    } catch (e) {
+        showPopupMessage('error', 'خطأ أثناء الإضافة');
+    }
+}
+
+async function removeTagFromChannel(channelId, tag, banned) {
+    try {
+        for (const forumId in configData.forums) {
+            const forum = configData.forums[forumId];
+            if (forum.channels?.[channelId]) {
+                const channel = forum.channels[channelId];
+
+                if (banned) {
+                    channel.bannedTags = (channel.bannedTags || []).filter(t => t !== tag);
+                } else {
+                    channel.tags = (channel.tags || []).filter(t => t !== tag);
+                }
+
+                await fetch(`/api/forums/${forumId}/channels/${channelId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(channel),
+                });
+
+await fetchData();
+                return;
+            }
+        }
+
+        showPopupMessage('error', 'الروم غير موجود');
+    } catch (e) {
+        showPopupMessage('error', 'خطأ أثناء الحذف');
+    }
+}
+
+</script>
+
+<script>
+    function showLoadingMessage() {
+    const modal = document.createElement('div');
+    modal.className = 'dev-modal';
+    
+modal.innerHTML = `
+    <div class="dev-modal-content">
+        <span class="modal-icon info">🔃</span>
+        <h3>جاري تحميل البيانات</h3>
+        <div class="message-text">يرجى الانتظار...</div>
+        <div class="message-text" style="margin-top:8px; color:#ff0000; font-weight:bold;">
+            👅 استمتع بالأغنية 
+        </div>
+        <div id="countdown-display" style="font-size: 1.2rem; color: #ff6f00; margin: 15px 0; font-weight: bold;">10</div>
+    </div>
+`;
+    
+    document.body.appendChild(modal);
+    window.currentModal = modal;
+    
+    let countdown = 15;
+    const countdownDisplay = document.getElementById('countdown-display');
+    
+    const countdownInterval = setInterval(() => {
+        countdown--;
+        countdownDisplay.textContent = countdown;
+        
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+            
+            
+            modal.innerHTML = `
+                <div class="dev-modal-content">
+                    <span class="modal-icon success">✅</span>
+                    <h3>تم تحديث البيانات بنجاح</h3>
+                    <div class="message-text">تم إعادة تشغيل البوت وتحديث جميع البيانات بنجاح</div>
+                    <button onclick="refreshPageAndClose()">موافق</button>
+                </div>
+            `;
+        }
+    }, 1000);
+    }
+    
+function refreshPageAndClose() {
+    closeModal();
+    location.reload();
+}
+
+function showPopupMessage(type, message, isConfirm = false, callback = null) {
+    const icons = {
+        success: "✅",
+        error: "❌", 
+        info: "ℹ️",
+        warning: "⚠️",
+        confirm: "❓",
+        update: " 🔃"
+    };
+    
+    const modal = document.createElement('div');
+    modal.className = 'dev-modal';
+    
+    let buttonsHtml = '';
+    if (isConfirm && callback) {
+        buttonsHtml = `
+            <button onclick="handleModalAction(true)">تأكيد</button>
+            <button class="secondary" onclick="handleModalAction(false)">إلغاء</button>
+        `;
+    } else {
+        buttonsHtml = '<button onclick="closeModal()">موافق</button>';
+    }
+    
+    modal.innerHTML = `
+        <div class="dev-modal-content">
+            <span class="modal-icon ${isConfirm ? 'confirm' : type}">${icons[isConfirm ? 'confirm' : type]}</span>
+            <h3>${isConfirm ? 'تأكيد العملية' : getMessageTitle(type)}</h3>
+            <div class="message-text">${message}</div>
+            ${buttonsHtml}
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+  
+    window.currentModalCallback = callback;
+    window.currentModal = modal;
+}
+
+function getMessageTitle(type) {
+    const titles = {
+        success: 'تمت العملية بنجاح',
+        error: 'حدث خطأ',
+        info: '  نقص معلومات',
+        warning: 'تحذير',
+        update: ' تـحـمـيـل'
+    };
+    return titles[type] || 'إشعار';
+}
+
+function closeModal() {
+    if (window.currentModal) {
+        window.currentModal.remove();
+        window.currentModal = null;
+        window.currentModalCallback = null;
+    }
+}
+
+function handleModalAction(confirmed) {
+    if (window.currentModalCallback) {
+        window.currentModalCallback(confirmed);
+    }
+    closeModal();
+}
+
+
+function showConfirm(message, callback) {
+    showPopupMessage('confirm', message, true, (confirmed) => {
+        if (confirmed === true) {
+            callback();
+        }
+        
+    });
+}
+
+// دالة طلب إدخال بيانات
+function showPrompt(title, placeholder, callback) {
+    const modal = document.createElement('div');
+    modal.className = 'dev-modal';
+    
+    modal.innerHTML = `
+        <div class="dev-modal-content">
+            <span class="modal-icon info">📝</span>
+            <h3>${title}</h3>
+            <input type="text" id="promptInput" placeholder="${placeholder}" />
+            <button onclick="handlePromptSubmit()">تأكيد</button>
+            <button class="secondary" onclick="closeModal()">إلغاء</button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    
+    setTimeout(() => {
+        const input = document.getElementById('promptInput');
+        if (input) input.focus();
+    }, 100);
+    
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            handlePromptSubmit();
+        } else if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+    
+    window.currentModal = modal;
+    window.currentPromptCallback = callback;
+}
+
+function handlePromptSubmit() {
+    const input = document.getElementById('promptInput');
+    const value = input ? input.value.trim() : '';
+    
+    if (window.currentPromptCallback) {
+        window.currentPromptCallback(value);
+    }
+    closeModal();
+    window.currentPromptCallback = null;
+}
+</script>
+<script>
+
+(function(){
+  if (window.__LOG_FETCH_WRAPPED__) return; 
+  window.__LOG_FETCH_WRAPPED__ = true;
+
+  const originalFetch = window.fetch;
+  window.fetch = async function(input, init = {}){
+    const url = typeof input==='string' ? input : (input && input.url) || '';
+    const method = (init && init.method ? init.method : 'GET').toUpperCase();
+    const resp = await originalFetch(input, init);
+
+    try{
+      const isApi = typeof url === 'string' && (
+        url.startsWith('/api/') ||
+        (url.includes('://') && url.includes('/api/'))
+      );
+      const isLog = typeof url==='string' && url.indexOf('/api/log')===0;
+      const isMut = method!=='GET';
+      if(isApi && !isLog && isMut){
+        let details = null;
+        try{
+          if(init && typeof init.body==='string'){
+            const h = init.headers || {};
+            const ct = h['Content-Type'] || h['content-type'] || '';
+            if(ct.includes('application/json')) details = JSON.parse(init.body);
+          }
+        }catch(e){}
+        let action = 'DASHBOARD_MUTATION';
+        const u = url.toLowerCase();
+        if (u.includes('/api/banned')) action='TAGS_UPDATE';
+        else if (u.includes('/api/rules')) action='ROLES_UPDATE';
+        else if (u.includes('/api/forums') || u.includes('/api/channels')){
+          if (method==='POST') action='ROOM_UPDATE';
+          else if (method==='DELETE') action='ROOM_DELETE';
+        } else if (u.includes('/api/restart-bot') || u.includes('/api/bot-status')){
+          action='BOT_STATUS';
+        }
+        originalFetch('/api/log', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ action, details, url, method })
+        }).catch(()=>{});
+      }
+    }catch(e){}
+    return resp;
+  };
+})();
+
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+  ));
+}
+
+function fmtActorBox(a){
+  if(!a) return '<div class="actor-box"><div class="line">غير معروف</div></div>';
+
+if (a.type === 'DiscordUser') {
+   const display = a.global_name ||' ألـادارة الـعـلـيا';
+    const id = a.discordId || '';
+      const ip = a.ip || '';
+    return `
+      <div class="actor-box">
+        <div class="line"><strong>${escapeHtml(display)}</strong></div>
+        <div class="line"><span class="label">Username: </span> ${escapeHtml(a.username || '')}</div>
+        <div class="line"><span class="label">ID: </span> ${escapeHtml(id)}</div>
+      </div>
+    `;
+  }
+
+  const ip = a.ip || '';
+  return `
+    <div class="actor-box">
+      <div class="line"><strong>غير معروف</strong></div>
+      ${ip ? `<div class="line"><span class="label">IP:</span> ${escapeHtml(ip)}</div>` : ''}
+    </div>
+  `;
+}
+
+function joinList(arr, max=5){
+  if(!Array.isArray(arr) || arr.length===0) return '';
+  const head = arr.slice(0,max).join('، ');
+  return arr.length>max ? `${head} … (+${arr.length-max})` : head;
+}
+function deduceOp(action, method, d={}){
+  const a = (action||'').toUpperCase();
+  const m = (method||'').toUpperCase();
+  const op = (d.op||d.operation||d.action||'').toLowerCase();
+
+  if (m==='DELETE' || a.includes('DELETE') || op==='delete' || op==='remove') return 'delete';
+  if (m==='POST'   || a.includes('CREATE') || a.includes('ADD') || op==='add' || op==='create') return 'add';
+  if (m==='PUT' || m==='PATCH' || a.includes('UPDATE') || op==='update' || op==='edit') return 'update';
+  if (op==='enable')  return 'enable';
+  if (op==='disable') return 'disable';
+  if (op==='restart') return 'restart';
+  return 'update';
+}
+function opVerb(op, noun='العنصر'){
+  switch(op){
+    case 'add':     return `تم إضافة ${noun}`;
+    case 'delete':  return `تم حذف ${noun}`;
+    case 'update':  return `تم تحديث ${noun}`;
+    case 'enable':  return `تم تفعيل ${noun}`;
+    case 'disable': return `تم تعطيل ${noun}`;
+    case 'restart': return `تم تنفيذ إعادة تشغيل ${noun}`;
+    default:        return `عملية على ${noun}`;
+  }
+}
+ 
+ 
+function describeEntry(x){
+  const method = (x.method || '').toUpperCase();
+  const url = (x.url || '').toLowerCase();
+  const d = x.details || {};
+
+  
+  function getRoomName(roomId) {
+    
+    if (window.configData) {
+      
+      for (const forumId in window.configData.forums) {
+        const forum = window.configData.forums[forumId];
+        if (forum.channels && forum.channels[roomId]) {
+          return `${forum.channels[roomId].name || roomId} (في فوروم ${forum.name})`;
+        }
+      }
+      
+      if (window.configData.channels && window.configData.channels[roomId]) {
+        return window.configData.channels[roomId].name || roomId;
+      }
+    }
+    return roomId;
+  }
+
+  function getForumName(forumId) {
+    if (window.configData && window.configData.forums && window.configData.forums[forumId]) {
+      return window.configData.forums[forumId].name || forumId;
+    }
+    return forumId;
+  }
+
+  // التاقات المحظورة العامة
+  if (url.includes('/api/banned')) {
+    if (Array.isArray(d.bannedTags)) {
+      const oldTags = d.oldBannedTags || [];
+      const newTags = d.bannedTags || [];
+      
+      const added = newTags.filter(tag => !oldTags.includes(tag));
+      const removed = oldTags.filter(tag => !newTags.includes(tag));
+      
+      if (added.length && removed.length) {
+        return `تحديث التاقات المحظورة العامة - تمت إضافة: [${added.join(', ')}] وحذف: [${removed.join(', ')}]`;
+      } else if (added.length) {
+        return `تمت إضافة التاق المحظور "${added[0]}" إلى القائمة العامة`;
+      } else if (removed.length) {
+        return `تم حذف التاق المحظور "${removed[0]}" من القائمة العامة`;
+      }
+    }
+    return `تحديث التاقات المحظورة العامة`;
+  }
+
+  // التاقات الخاصة بالرومات
+  if (url.includes('/api/channel-banned/')) {
+    const roomId = url.split('/').pop();
+    const roomName = getRoomName(roomId);
+    return `تحديث التاقات المحظورة الخاصة للروم "${roomName}"`;
+  }
+
+  // عمليات الفورومات والرومات
+  if (url.includes('/api/forums')) {
+    const urlParts = url.split('/');
+    
+    if (url.includes('/channels')) {
+      
+      const forumId = urlParts[urlParts.indexOf('forums') + 1];
+      const roomId = urlParts[urlParts.indexOf('channels') + 1];
+      const forumName = getForumName(forumId);
+      
+      if (method === 'POST') {
+        if (d.id && d.name) {
+          return `تمت إضافة روم جديد باسم "${d.name}" و ID "${d.id}" إلى الفوروم "${forumName}"`;
+        } else if (d.name) {
+          return `تحديث بيانات الروم "${d.name}" في الفوروم "${forumName}"`;
+        }
+        return `تحديث روم في الفوروم "${forumName}"`;
+      }
+      if (method === 'DELETE') {
+        const roomName = getRoomName(roomId);
+        return `تم حذف الروم "${roomName}" من الفوروم "${forumName}"`;
+      }
+    } else {
+      // عمليات الفورومات
+      const forumId = urlParts[urlParts.indexOf('forums') + 1];
+      
+      if (method === 'POST') {
+        if (d.id && d.name) {
+          return `تم إنشاء فوروم جديد باسم "${d.name}" و ID "${d.id}"`;
+        } else if (d.newId && d.name) {
+          return `تحديث الفوروم - تم تغيير الاسم إلى "${d.name}" والـ ID إلى "${d.newId}"`;
+        } else if (d.name) {
+          return `تحديث اسم الفوروم إلى "${d.name}"`;
+        }
+        return `تحديث بيانات الفوروم`;
+      }
+      if (method === 'DELETE') {
+        const forumName = getForumName(forumId);
+        return `تم حذف الفوروم "${forumName}" وجميع الرومات بداخله`;
+      }
+    }
+  }
+
+  // عمليات الرولات والأوامر
+  if (url.includes('/api/rules/')) {
+    const cmdName = url.split('/').pop();
+    
+    if (Array.isArray(d.roles)) {
+      
+      if (d.oldRoles && Array.isArray(d.oldRoles)) {
+        const oldIds = d.oldRoles.map(r => r.id);
+        const newIds = d.roles.map(r => r.id);
+        
+        const added = d.roles.filter(r => !oldIds.includes(r.id));
+        const removed = d.oldRoles.filter(r => !newIds.includes(r.id));
+        
+        if (added.length && removed.length) {
+          return `تحديث رولات الأمر "${cmdName}" - تمت إضافة: [${added.map(r => r.name).join(', ')}] وحذف: [${removed.map(r => r.name).join(', ')}]`;
+        } else if (added.length) {
+          const role = added[0];
+          return `تمت إضافة رول جديد باسم "${role.name}" و ID "${role.id}" إلى الأمر "${cmdName}"`;
+        } else if (removed.length) {
+          const role = removed[0];
+          return `تم حذف الرول "${role.name}" (ID: ${role.id}) من الأمر "${cmdName}"`;
+        }
+      }
+      return `تحديث رولات الأمر "${cmdName}" (${d.roles.length} رول)`;
+    }
+    return `تعديل صلاحيات الأمر "${cmdName}"`;
+  }
+
+  // عمليات البوت
+  if (url.includes('/api/restart-bot')) {
+    return `تم تنفيذ إعادة تشغيل البوت وإعادة تحميل جميع البيانات`;
+  }
+  
+  if (url.includes('/api/bot-status')) {
+    const status = d.status === 'running' ? 'تشغيل' : 'إيقاف';
+    return `تم ${status} البوت`;
+  }
+
+  // روم التقارير
+  if (url.includes('/api/summary-channel')) {
+    const name = d.summaryChannelName || 'غير محدد';
+    const id = d.summaryChannel || 'غير محدد';
+    return `تم تحديث إعدادات روم التقارير إلى "${name}" (ID: ${id})`;
+  }
+
+  // التاقات العادية في الرومات 
+  if (url.includes('/api/channels/')) {
+    const roomId = url.split('/').pop();
+    const roomName = getRoomName(roomId);
+    
+    if (method === 'POST' && d.tags && Array.isArray(d.tags)) {
+      if (d.oldTags && Array.isArray(d.oldTags)) {
+        const added = d.tags.filter(tag => !d.oldTags.includes(tag));
+        const removed = d.oldTags.filter(tag => !d.tags.includes(tag));
+        
+        if (added.length && removed.length) {
+          return `تحديث التاقات في الروم "${roomName}" - تمت إضافة: [${added.join(', ')}] وحذف: [${removed.join(', ')}]`;
+        } else if (added.length) {
+          return `تمت إضافة التاق "${added[0]}" إلى الروم "${roomName}"`;
+        } else if (removed.length) {
+          return `تم حذف التاق "${removed[0]}" من الروم "${roomName}"`;
+        }
+      }
+      return `تحديث التاقات في الروم "${roomName}" (${d.tags.length} تاق)`;
+    }
+    
+    if (method === 'DELETE') {
+      return `تم حذف الروم "${roomName}"`;
+    }
+    
+    if (method === 'POST' && d.name) {
+      return `تحديث بيانات الروم "${d.name}"`;
+    }
+  }
+
+  
+  return `عملية ${method} على المسار: ${url}`;
+}
+
+
+// سكربت اللوق 
+
+(function(){
+  const $ = s=>document.querySelector(s);
+  const openBtn   = $('#open-logs-btn');
+  const closeBtn  = $('#logs-close');
+  const backdrop  = $('#logs-backdrop');
+  const modal     = $('#logs-modal');
+  const tbody     = $('#logs-tbody');
+  const countEl   = $('#logs-count');
+  const searchIn  = $('#logs-search');
+  const refreshBtn= $('#logs-refresh');
+
+  let logs = [];
+  let selectedCat = '';
+
+  function open(){ modal.style.display='flex'; backdrop.style.display='block'; loadLogs(); }
+  function close(){ modal.style.display='none'; backdrop.style.display='none'; }
+
+  if (openBtn)   openBtn.addEventListener('click', open);
+  if (closeBtn)  closeBtn.addEventListener('click', close);
+  if (backdrop)  backdrop.addEventListener('click', close);
+  if (refreshBtn)refreshBtn.addEventListener('click', loadLogs);
+  if (searchIn)  searchIn.addEventListener('input', render);
+
+  
+  document.querySelectorAll('#logs-cats .cat-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('#logs-cats .cat-btn').forEach(b=> b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCat = btn.getAttribute('data-cat') || '';
+      render();
+    });
+  });
+
+  function computeCategory(x){
+    const u = (x.url||'').toLowerCase();
+    const a = (x.action||'').toLowerCase();
+    if (u.includes('/api/banned') || a.includes('tag')) return 'tags';
+    if (u.includes('/api/forums') || u.includes('/api/channels') || a.includes('room') || a.includes('channel') || a.includes('forum')) return 'rooms';
+    if (u.includes('/api/rules') || a.includes('role') || a.includes('rule')) return 'roles';
+    if (u.includes('/api/restart-bot') || u.includes('/api/bot-status') || a.includes('bot')) return 'bot';
+    return '';
+  }
+  function fmt(t){ try{ return new Date(t).toLocaleString(); }catch{ return t||''; } }
+
+  async function loadLogs(){
+    try{
+      const r = await fetch('/api/logs');
+      const data = await r.json();
+      const arr = Array.isArray(data) ? data : (data && Array.isArray(data.logs) ? data.logs : []);
+      logs = arr.slice().sort((a,b)=> new Date(b.time) - new Date(a.time));
+      render();
+    }catch(e){
+      console.error('loadLogs failed:', e);
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#9aa;">تعذر تحميل اللوق</td></tr>`;
+      if (countEl) countEl.textContent = `0 سجل`;
+    }
+  }
+
+  function render(){
+    const q = (searchIn && searchIn.value || '').trim().toLowerCase();
+    const filtered = logs.filter(x=>{
+      if (selectedCat && computeCategory(x)!==selectedCat) return false;
+      if (q){
+        const hay = [
+          x.action, x.url, x.method,
+          x.actor?.username, x.actor?.discordId, x.actor?.type,
+          x.details ? JSON.stringify(x.details) : ''
+        ].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    if (countEl) countEl.textContent = `${filtered.length} سجل`;
+
+    tbody.innerHTML = filtered.map(x=>`
+      <tr>
+        <td>${fmt(x.time)}</td>
+        <td>${x.action||''}</td>
+        <td><span class="badge ${(x.method||'').toLowerCase()}">${(x.method||'').toUpperCase()}</span></td>
+        <td style="word-break:break-all;">${x.url||''}</td>
+        <td class="brief">${escapeHtml(describeEntry(x))}</td>
+        <td>${fmtActorBox(x.actor)}</td>
+        <td style="white-space:pre-wrap;">${x.details ? escapeHtml(JSON.stringify(x.details, null, 2)) : ''}</td>
+      </tr>
+    `).join('') || `<tr><td colspan="7" style="text-align:center; color:#9aa;">لا يوجد سجلات</td></tr>`;
+  }
+})();
+</script>
+
+   
+</body>
+
+</html>
