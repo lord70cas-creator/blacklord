@@ -1,0 +1,66 @@
+{
+  "token": "MTM5Njg0NjIwOTgyMTU3NzI3Ng.GDjfmE.otwCGI5fRf4z5RNJyvoZyhMLHEtEDmcJ_qBAqE",
+  "api_key": "279883424075e4f5f7667b59b8f5450947acadccac3674ee73fecb20a2ab77ac9df437c404b72867f46e3263ec1289993f2a07fe87cecfac592ac7061",
+  "user_id": "1750503",
+  "clientId": "1396846209821577276",
+  "clientsecret": "qtdsH0oognWkK8Zqaxix4dBTyj98gAUI",
+  "redirecturi": "http://prem-eu2.bot-hosting.net:20672/callback",
+  "scope": "identify guilds email",
+  "guildId": "1391087147045486623",
+  "googleApiKey": "AIzaSyCwOZxQTaN7R9AS3wLLftCW5BUZo-n5GkA",
+  "postIntervalMinutes": 60,
+  "botStatus": "running",
+  "summaryChannel": {
+    "id": "1391417148903129138",
+    "name": "🚪．ʟᴏɢꜱ・بوت・النشر"
+  },
+  "channels": {},
+  "forums": {
+    "1408807572126961754": {
+      "name": "test",
+      "channels": {
+        "1408807609602932777": {
+          "name": "و",
+          "tags": [
+            "trap",
+            "ass",
+            "dick",
+            "femboy",
+            "feet"
+          ],
+          "bannedTags": [],
+          "searchMode": "AND"
+        }
+      }
+    },
+    "1358095810117763215": {
+      "name": "🌸．ʜᴇɴᴛᴀɪ・ꜱᴛʀᴀɪɢʜᴛ",
+      "channels": {
+        "1358100551975436288": {
+          "name": "milf",
+          "tags": [
+            "milf"
+          ],
+          "bannedTags": [],
+          "searchMode": "AND"
+        }
+      }
+    }
+  },
+  "bannedTags": [
+    "furry",
+    "shota",
+    "loli",
+    "blood"
+  ],
+  "danbooru": {
+    "login": "lord07",
+    "api_key": "VAXX9mM3PHuDRT8Xo3tXNph1"
+  },
+  "startTime": 1756659100751,
+  "rule34": {
+    "baseUrl": "https://rule34.xxx/index.php?page=dapi&s=post&q=index",
+    "userAgent": "DiscordBot"
+  },
+  "summaryChannelName": "لوق"
+}
